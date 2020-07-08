@@ -1,19 +1,24 @@
-// const http = require('http');
-// const { sum, sub } = require('./helpers');
+// const express = require('express');
+// const app = express();
 
-// const server = http.createServer((req, res) => {
-//     res.end('pina from node js');
-// });
+// app.get('/', (req, res) => {
+//     res.send("express pina");
+// })
 
-// server.listen(3000);
+// app.listen(3000);
 
-// console.log(sum(259, 111), sub(259, 111));
+const fs = require('fs');
+const fileName = "target.txt";
+//fs.watch(fileName, () => console.log(`A fájl +változott!`));
 
-const express = require('express');
-const app = express();
+// const data = fs.readFileSync(fileName);
+// console.log(data.toString());
+const errHandler = err => console.log(err);
+const dataHandler = data => console.log(data.toString());
 
-app.get('/', (req, res) => {
-    res.send("express pina");
-})
+ fs.readFile(fileName, (err, data)=>{
+     if(err) errHandler(err);
+     dataHandler(data);
+ });
 
-app.listen(3000);
+console.log('Asynchronous');
